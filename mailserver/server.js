@@ -3,12 +3,13 @@ const koa = require('koa')
 const koaRouter = require('koa-router')
 
 const app = new koa()
-const router = new koaRouter()
+//const router = new koaRouter()
+const router = require('./routes');
 
-router.get('koala', '/', (ctx) => {
+/*router.get('koala', '/', (ctx) => {
   ctx.body = "Welcome! To the Koala Book of Everything!"
 })
-
+*/
 app.use(router.routes())
   .use(router.allowedMethods())
 
