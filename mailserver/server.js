@@ -1,15 +1,15 @@
 'use strict';
 const koa = require('koa')
+const json = require('koa-json')
 const koaRouter = require('koa-router')
 
 const app = new koa()
-//const router = new koaRouter()
+
+app.use(json());
+
 const router = require('./routes');
 
-/*router.get('koala', '/', (ctx) => {
-  ctx.body = "Welcome! To the Koala Book of Everything!"
-})
-*/
+
 app.use(router.routes())
   .use(router.allowedMethods())
 
