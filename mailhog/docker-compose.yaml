@@ -1,0 +1,20 @@
+version: '3'
+services:
+   mailhog: #    restart: always
+    tty: true
+    privileged: true
+    container_name: mailhog
+    image: mailhog/mailhog
+    command: ["-storage=maildir", "-maildir-path=/maildir"]
+    volumes:
+      - ./maildir:/maildir
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      mailhog_network:
+        aliases:
+          - mailhog.api.local
+networks:
+  mailhog_network:
+    external: true
