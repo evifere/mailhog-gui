@@ -27,6 +27,8 @@ module.exports = function (router) {
             ctx.body = { "message": "init mails done" };
         })
 
+        ctx.body = { "message": "init mails done" };
+
     })
 };
 
