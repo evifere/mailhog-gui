@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import AllMessagesList from './pages/AllMessagesList';
+import PrimarySearchAppBar from './components/PrimarySearchAppBar'
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
 //
@@ -18,6 +19,7 @@ import AllMessagesList from './pages/AllMessagesList';
 export default function BasicExample() {
   return (
     <Router>
+      <PrimarySearchAppBar mailCount="2"/>
       <div>
         <ul>
           <li>
