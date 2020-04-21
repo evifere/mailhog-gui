@@ -8,6 +8,7 @@ services:
     command: ["-storage=maildir", "-maildir-path=/maildir"]
     environment:
       - MH_STORAGE=maildir
+      - MH_CORS_ORIGIN=*
     volumes:
       - ./maildir:/maildir
     ports:
