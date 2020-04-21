@@ -6,6 +6,8 @@ services:
     container_name: mailhog
     image: mailhog/mailhog
     command: ["-storage=maildir", "-maildir-path=/maildir"]
+    environment:
+      - MH_STORAGE=maildir
     volumes:
       - ./maildir:/maildir
     ports:
