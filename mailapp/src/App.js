@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,12 +18,25 @@ import PrimarySearchAppBar from './components/PrimarySearchAppBar'
 // work properly.
 
 export default class App extends React.Component {
+  state = {
+    messages: [],
+    count:0
+  }
+
+  componentDidMount() {
+    axios.get(`http://mailhog.api.local:8025/api/v2/messages`)
+      .then(res => {
+        const messages = res.data.items;
+        const count = res.data.count;
+        this.setState({ messages,count });
+      })
+  }
 
   render() {
 
     return (
       <Router>
-        <PrimarySearchAppBar mailCount="2" />
+        <PrimarySearchAppBar mailCount={this.state.count} />
         <div>
           <ul>
             <li>
@@ -59,7 +73,7 @@ export default class App extends React.Component {
               <Dashboard />
             </Route>
             <Route path="/all">
-              <AllMessagesList />
+              <AllMessagesList messages={this.state.messages} />
             </Route>
           </Switch>
         </div>
