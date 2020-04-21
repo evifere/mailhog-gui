@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+import AllMessagesList from './pages/AllMessagesList';
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
 //
@@ -29,6 +29,9 @@ export default function BasicExample() {
           <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
+          <li>
+            <Link to="/all">All</Link>
+          </li>
         </ul>
 
         <hr />
@@ -49,6 +52,9 @@ export default function BasicExample() {
           </Route>
           <Route path="/dashboard">
             <Dashboard />
+          </Route>
+          <Route path="/all">
+            <AllMessagesList />
           </Route>
         </Switch>
       </div>
