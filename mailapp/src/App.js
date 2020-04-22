@@ -21,16 +21,30 @@ import MessageDetail from './pages/MessageDetail'
 export default class App extends React.Component {
   state = {
     messages: [],
-    count:0
+    count: 0
   }
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.onDelete = this.onDelete.bind(this);
+    this.loadList = this.loadList.bind(this)
+  }
+
+  onDelete(e) {
+    this.loadList();
+  }
+
+  loadList() {
     axios.get(`http://mailhog.api.local:8025/api/v2/messages`)
       .then(res => {
         const messages = res.data.items;
         const count = res.data.count;
-        this.setState({ messages,count });
+        this.setState({ messages, count });
       })
+  }
+
+  componentDidMount() {
+    this.loadList();
   }
 
   render() {
@@ -74,7 +88,7 @@ export default class App extends React.Component {
               <Dashboard />
             </Route>
             <Route exact path="/all">
-              <AllMessagesList messages={this.state.messages} />
+              <AllMessagesList messages={this.state.messages} onDelete={this.onDelete} />
             </Route>
 
             <Route exact path="/message/:id" component={MessageDetail} />
