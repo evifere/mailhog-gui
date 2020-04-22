@@ -6,6 +6,20 @@ const sendmail = require('sendmail')({
     smtpPort: 1025
 })
 
+const LoremIpsum = require("lorem-ipsum").LoremIpsum;
+
+const lorem = new LoremIpsum({
+    sentencesPerParagraph: {
+      max: 8,
+      min: 4
+    },
+    wordsPerSentence: {
+      max: 16,
+      min: 4
+    },
+    format:"html"
+  });
+
 module.exports = function (router) {
     router.get('initmails', '/initmails', (ctx) => {
         sendmail({
@@ -19,8 +33,8 @@ module.exports = function (router) {
             from: 'test@mailhog.api.local',
             to: 'info@mailhog.api.local',
             /*  replyTo: 'jason@mailhog.api.local',*/
-            subject: 'MailComposer sendmail',
-            html: 'Mail of test sendmail '
+            subject: lorem.generateWords(5),
+            html:  lorem.generateParagraphs(7)
         }, function (err, reply) {
             console.log('errors :', err && err.stack)
             console.dir('reply = ', reply)
