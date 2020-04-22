@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import AllMessagesList from './pages/AllMessagesList';
 import PrimarySearchAppBar from './components/PrimarySearchAppBar'
+import MessageDetail from './pages/MessageDetail'
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
 //
@@ -72,9 +73,12 @@ export default class App extends React.Component {
             <Route path="/dashboard">
               <Dashboard />
             </Route>
-            <Route path="/all">
+            <Route exact path="/all">
               <AllMessagesList messages={this.state.messages} />
             </Route>
+
+            <Route exact path="/message/:id" component={MessageDetail} />
+
           </Switch>
         </div>
       </Router>
