@@ -18,12 +18,6 @@ export default function MessageDetail(props) {
     const [message, setMessage] = useState(null)
     const mail_id = props.match.params.id;
 
-    console.log('props', props);
-    console.log('message', message);
-    console.log('setMessage', setMessage);
-
-    console.log('mail_id', mail_id);
-
     useEffect(() => {
         if (message === null) {
             axios.get(`http://mailhog.api.local:8025/api/v1/messages/` + mail_id)

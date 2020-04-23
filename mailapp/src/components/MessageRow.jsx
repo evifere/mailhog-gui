@@ -22,7 +22,7 @@ export default function MessageRow({ message = {},onDelete }) {
            onDelete(e)
         })
     }
-    const btnDelete = <IconButton><Delete onClick={handlerDelete}/></IconButton>;
+    const btnDelete = <IconButton onClick={handlerDelete}><Delete /></IconButton>;
 
     return ((isDeleted) ? null :
         <li style={liStyle} key={message.ID}>{btnDetail}&nbsp;From {message.Content.Headers.From.map(from => <span>{from}</span>)} | {message.Content.Headers.Subject[0]} &nbsp;|{btnDelete}
