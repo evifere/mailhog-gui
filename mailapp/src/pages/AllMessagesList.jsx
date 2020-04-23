@@ -1,5 +1,12 @@
 import React from 'react';
 import MessageRow from '../components/MessageRow'
+
+
+const ulStyle = {
+  marginLeft:'25%',
+  marginRight:'25%'
+};
+
 export default class AllMessagesList extends React.Component {
 
   constructor(props) {
@@ -13,7 +20,7 @@ export default class AllMessagesList extends React.Component {
 
   render() {
     return (
-      <ul>
+      <ul style={ulStyle}>
         { this.props.messages.map(message => <MessageRow key={message.ID} message={message} onDelete={this.onDelete}/>)}
       </ul>
     )

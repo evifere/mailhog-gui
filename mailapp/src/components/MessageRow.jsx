@@ -6,8 +6,23 @@ import Visibility from '@material-ui/icons/Visibility';
 import Delete from '@material-ui/icons/Delete';
 
 const liStyle = {
-    display: 'table-row',
+    listStyle:'none',
+    textAlign : 'left',
+    borderBottom:'1px',
+    borderBottomColor: 'black',
+    borderBottomStyle: 'solid'
 };
+
+const spanStyle = {
+    textAlign:'center'
+}
+
+const btnDeleteCss = {
+    textAlign:'right',
+    float:'right'
+}
+
+
 
 export default function MessageRow({ message = {},onDelete }) {
     const btnDetail = <IconButton> <Link to={"/message/" + message.ID}><Visibility /></Link></IconButton>;
@@ -22,10 +37,10 @@ export default function MessageRow({ message = {},onDelete }) {
            onDelete(e)
         })
     }
-    const btnDelete = <IconButton onClick={handlerDelete}><Delete /></IconButton>;
+    const btnDelete = <IconButton style={btnDeleteCss} onClick={handlerDelete}><Delete /></IconButton>;
 
     return ((isDeleted) ? null :
-        <li style={liStyle} key={message.ID}>{btnDetail}&nbsp;From {message.Content.Headers.From.map(from => <span>{from}</span>)} | {message.Content.Headers.Subject[0]} &nbsp;|{btnDelete}
+        <li style={liStyle} key={message.ID}>{btnDetail}<span style={spanStyle}>&nbsp;From {message.Content.Headers.From.map(from => <span>{from}</span>)} | {message.Content.Headers.Subject[0]} &nbsp;</span>|{btnDelete}
         </li>
     )
 
