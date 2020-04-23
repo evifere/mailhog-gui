@@ -8,6 +8,7 @@ import Delete from '@material-ui/icons/Delete';
 const liStyle = {
     listStyle:'none',
     textAlign : 'left',
+    cursor:'pointer',
     borderBottom:'1px',
     borderBottomColor: 'black',
     borderBottomStyle: 'solid'
@@ -39,8 +40,29 @@ export default function MessageRow({ message = {},onDelete }) {
     }
     const btnDelete = <IconButton style={btnDeleteCss} onClick={handlerDelete}><Delete /></IconButton>;
 
+    const [isHover,setIsHover] = useState(false);
+
+    const handlerOnHover = (e) => {
+        setIsHover(true)
+    }
+
+    const handlerOnHoverOff = (e) => {
+        setIsHover(false)
+    }
+
+    const getLiStyle = () => {
+        if(!isHover){
+            return liStyle;
+        }
+
+        return {
+            color:"blue", 
+            ...liStyle
+        }
+    }
     return ((isDeleted) ? null :
-        <li style={liStyle} key={message.ID}>{btnDetail}<span style={spanStyle}>&nbsp;From {message.Content.Headers.From.map(from => <span>{from}</span>)} | {message.Content.Headers.Subject[0]} &nbsp;</span>|{btnDelete}
+        <li style={getLiStyle()} onMouseEnter={handlerOnHover} 
+            onMouseLeave={handlerOnHoverOff} key={message.ID}>{btnDetail}<span style={spanStyle}>&nbsp;From {message.Content.Headers.From.map(from => <span>{from}</span>)} | {message.Content.Headers.Subject[0]} &nbsp;</span>|{btnDelete}
         </li>
     )
 
