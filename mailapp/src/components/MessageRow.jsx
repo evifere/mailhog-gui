@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
@@ -6,41 +6,41 @@ import Visibility from '@material-ui/icons/Visibility';
 import Delete from '@material-ui/icons/Delete';
 
 const liStyle = {
-    listStyle:'none',
-    textAlign : 'left',
-    cursor:'pointer',
-    borderBottom:'1px',
+    listStyle: 'none',
+    textAlign: 'left',
+    cursor: 'pointer',
+    borderBottom: '1px',
     borderBottomColor: 'black',
     borderBottomStyle: 'solid'
 };
 
 const spanStyle = {
-    textAlign:'center'
+    textAlign: 'center'
 }
 
 const btnDeleteCss = {
-    textAlign:'right',
-    float:'right'
+    textAlign: 'right',
+    float: 'right'
 }
 
 
 
-export default function MessageRow({ message = {},onDelete }) {
+export default function MessageRow({ message = {}, onDelete }) {
     const btnDetail = <IconButton> <Link to={"/message/" + message.ID}><Visibility /></Link></IconButton>;
-    const [isDeleted,setIsDeleted] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
 
     const handlerDelete = (e) => {
         axios.delete(`http://mailhog.api.local:8025/api/v1/messages/` + message.ID)
-        .then(res => {
-            const message = res.data;
+            .then(res => {
+                const message = res.data;
 
-           setIsDeleted(true)
-           onDelete(e)
-        })
+                setIsDeleted(true)
+                onDelete(e)
+            })
     }
     const btnDelete = <IconButton style={btnDeleteCss} onClick={handlerDelete}><Delete /></IconButton>;
 
-    const [isHover,setIsHover] = useState(false);
+    const [isHover, setIsHover] = useState(false);
 
     const handlerOnHover = (e) => {
         setIsHover(true)
@@ -51,17 +51,17 @@ export default function MessageRow({ message = {},onDelete }) {
     }
 
     const getLiStyle = () => {
-        if(!isHover){
+        if (!isHover) {
             return liStyle;
         }
 
         return {
-            color:"blue", 
+            color: "blue",
             ...liStyle
         }
     }
     return ((isDeleted) ? null :
-        <li style={getLiStyle()} onMouseEnter={handlerOnHover} 
+        <li style={getLiStyle()} onMouseEnter={handlerOnHover}
             onMouseLeave={handlerOnHoverOff} key={message.ID}>{btnDetail}<span style={spanStyle}>&nbsp;From {message.Content.Headers.From.map(from => <span>{from}</span>)} | {message.Content.Headers.Subject[0]} &nbsp;</span>|{btnDelete}
         </li>
     )
