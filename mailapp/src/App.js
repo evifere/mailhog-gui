@@ -9,6 +9,7 @@ import {
 import AllMessagesList from './pages/AllMessagesList';
 import PrimarySearchAppBar from './components/PrimarySearchAppBar'
 import MessageDetail from './pages/MessageDetail'
+import ComposeMessage from './pages/ComposeMessage'
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
 //
@@ -66,6 +67,9 @@ export default class App extends React.Component {
             <li>
               <Link to="/all">All</Link>
             </li>
+            <li>
+              <Link to="/compose">Compose</Link>
+            </li>
           </ul>
 
           <hr />
@@ -92,6 +96,10 @@ export default class App extends React.Component {
             </Route>
 
             <Route exact path="/message/:id" component={MessageDetail} />
+
+            <Route path="/compose">
+              <ComposeMessage />
+            </Route>
 
           </Switch>
         </div>
