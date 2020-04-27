@@ -14,7 +14,9 @@
   "author": "evifere",
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^2.2.3",
     "koa": "^2.11.0",
+    "koa-bodyparser": "^4.3.0",
     "koa-json": "^2.0.2",
     "koa-router": "^8.0.8",
     "lorem-ipsum": "^2.0.3",
